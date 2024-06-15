@@ -1,39 +1,54 @@
 <% layout("./template/syntex.ejs")%>
 <body>
-    <a href="/view/<%=idvalue._id%>"><i class="fa-solid fa-backward"></i></a>
+    <a href="/listing/view/<%=idvalue._id%>"><i class="fa-solid fa-backward"></i></a>
     <h1 style="text-align: center;">Edit</h1>
     <div class="row offset-3 ">
         <div class="col-8">
-            <form action="/edit/<%=idvalue._id%>"  method="post" >
+            <form action="/listing/edit/<%=idvalue._id%>"  method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label">Title:</label>
-                  <input value="<%=idvalue.title%>" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="title">
+                  <input value="<%=idvalue.title%>" type="text" class="form-control border-2" id="exampleInputEmail1" aria-describedby="emailHelp" name="title" required>
+                  <div class="invalid-feedback">
+                    Please enter title.
+                  </div>
                 </div>
                 <div class="mb-3">
                   <label for="exampleInputPassword1" class="form-label">Description:</label>
-                  <input value="<%=idvalue.description%>" type="text" class="form-control" id="exampleInputPassword1" name="description">
+                  <input value="<%=idvalue.description%>" type="text" class="form-control border-2" id="exampleInputPassword1" name="description" required>
+                  <div class="invalid-feedback">
+                    Please enter description.
+                  </div>
                 </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Filename:</label>
-                    <input value="<%=idvalue.image.filename%>"  type="text" class="form-control" id="exampleInputPassword1" name="filename">
-                  </div>
                   <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">URL:</label>
-                    <input value="<%=idvalue.image.url%>" type="text" class="form-control" id="exampleInputPassword1" name="url">
+                    <label for="exampleInputPassword1" class="form-label">Present Image:</label><br>
+                    <img src="<%=idvalue.image.url%>" alt="Old image preview"m width="200px"><br>
+                    <label for="exampleInputPassword1" class="form-label">New Image:</label>
+                    <input value="<%=idvalue.image.url%>" type="file" class="form-control border-2" id="exampleInputPassword1" name="url" required>
                   </div>
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Price:</label>
-                    <input value="<%=idvalue.price%>"  type="number" class="form-control" id="exampleInputPassword1" name="price">
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Location:</label>
-                    <input  value="<%=idvalue.location%>" type="text" class="form-control" id="exampleInputPassword1" name="location">
+                  <div class="row">
+                    <div class="mb-3 col-lg-4 col-sm-12">
+                      <label for="exampleInputPassword1" class="form-label">Price:</label>
+                      <input value="<%=idvalue.price%>"  type="number" class="form-control border-2" id="exampleInputPassword1" name="price" required>
+                      <div class="invalid-feedback">
+                        Please enter price.
+                      </div>
+                    </div>
+                    <div class="mb-3 col-lg-8 col-sm-12">
+                      <label for="exampleInputPassword1" class="form-label">Location:</label>
+                      <input  value="<%=idvalue.location%>" type="text" class="form-control border-2" id="exampleInputPassword1" name="location" required>
+                      <div class="invalid-feedback">
+                        Please enter location.
+                      </div>
+                    </div>
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Country:</label>
-                    <input value="<%=idvalue.country%>" type="text" class="form-control" id="exampleInputPassword1" name="country">
+                    <input value="<%=idvalue.country%>" type="text" class="form-control border-2" id="exampleInputPassword1" name="country" required>
+                    <div class="invalid-feedback">
+                      Please enter country.
+                    </div>
                   </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">Edit</button>
               </form>
         </div>
     </div>

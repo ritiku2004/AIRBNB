@@ -1,0 +1,18 @@
+<% layout("./template/syntex.ejs")%>
+
+<div class="row offset-4 mt-4">
+    <div class="col-6">
+      <h3 class="mb-3">Log-in</h3>
+        <form class="needs-validation" action="/auth/login" method="post" novalidate>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">User name:</label>
+              <input type="text" class="form-control border-2" id="exampleInputPassword1" name="username" placeholder="Write username here" required>
+            </div> 
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password:</label>
+                <input type="password" class="form-control border-2" id="exampleInputPassword1" name="password" placeholder="Write password here" required>
+              </div>
+            <button type="submit" class="btn btn-primary">Log-in</button>
+          </form>
+    </div>
+</div>
