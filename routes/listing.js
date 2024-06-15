@@ -24,7 +24,7 @@ router.get("/price",wrapasync(price));
  // show route
  router.get("/view/:id" , wrapasync(view));
  
-//Delete Route
+//Delete Route it delet everything on one click
 router.get("/delete/:id",isLoggedIn, wrapasync(del));
 
 //Edit form Route

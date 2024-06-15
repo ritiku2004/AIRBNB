@@ -32,7 +32,7 @@ const sessionOptions = {
 
     },
 };
-
+//session setup
 app.use(session(sessionOptions));
 app.use(flash());
 
