@@ -18,12 +18,12 @@ function wrapasync(fn){
 router.get("/", wrapasync(index));
 
 
-//Price index route
+//Price index route 
 router.get("/price",wrapasync(price));
-
+ 
  // show route
- router.get("/view/:id", wrapasync(view));
-
+ router.get("/view/:id" , wrapasync(view));
+ 
 //Delete Route
 router.get("/delete/:id",isLoggedIn, wrapasync(del));
 
