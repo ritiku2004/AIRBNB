@@ -1,46 +1,58 @@
 <% layout("./template/syntex.ejs")%>
 <body>
   
-  <a href="/"><i class="fa-solid fa-backward"></i></a>
+  <a href="/listing"><i class="fa-solid fa-backward"></i></a>
   <h1 style="text-align: center;">Create</h1>
     <div class="row offset-3 ">
         <div class="col-8">
-            <form class="needs-validation" action="/create" method="post" novalidate>
+            <form class="needs-validation" action="/listing/create" method="post" enctype="multipart/form-data" novalidate>
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label">Title:</label>
-                  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="title" required>
+                  <input type="text" class="form-control border-2" id="exampleInputEmail1" aria-describedby="emailHelp" name="title" placeholder="Write title here" required>
                   <div class="valid-feedback">
                     Looks good!
                   </div>
                   <div class="invalid-feedback">
-                    Please enter title.
+                    Please Enter title.
                   </div>
                 </div>
                 <div class="mb-3">
                   <label for="exampleInputPassword1" class="form-label">Description:</label>
-                  <input type="text" class="form-control" id="exampleInputPassword1" name="description" required>
+                  <input type="text" class="form-control border-2" id="exampleInputPassword1" name="description" placeholder="Write description here" required>
+                  <div class="invalid-feedback">
+                    Please Enter description.
+                  </div>
                 </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Filename:</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1" name="filename" required>
-                  </div>
+                
                   <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">URL:</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1" name="url" required>
+                    <label for="exampleInputPassword1" class="form-label">Upload Image:</label>
+                    <input type="file" class="form-control border-2" id="exampleInputPassword1" placeholder="Write image URL here" name="url">
                   </div>
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Price:</label>
-                    <input type="number" class="form-control" id="exampleInputPassword1" name="price" required>
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Location:</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1" name="location" required>
+                  <div class="row">
+                    <div class="mb-3 col-lg-4 col-sm-12">
+                      <label for="exampleInputPassword1" class="form-label">Price:</label>
+                      <input type="number" class="form-control border-2" id="exampleInputPassword1" name="price" placeholder="Write price here" required>
+                      <div class="invalid-feedback">
+                        Please Enter price.
+                      </div>
+                    </div>
+                    <div class="mb-3 col-lg-8 col-sm-12">
+                      <label for="exampleInputPassword1" class="form-label">Location:</label>
+                      <input type="text" class="form-control border-2" id="exampleInputPassword1" name="location" placeholder="Write location here" required>
+                      <div class="invalid-feedback">
+                        Please Enter location.
+                      </div>
+                    </div>
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Country:</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1" name="country" required>
+                    <input
+                     type="text" class="form-control border-2" id="exampleInputPassword1" name="country" placeholder="Write country here" required>
+                     <div class="invalid-feedback">
+                      Please Enter country.
+                    </div>
                   </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">Create</button>
               </form>
         </div>
     </div>

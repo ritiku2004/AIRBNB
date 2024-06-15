@@ -1,6 +1,6 @@
 <% layout("./template/syntex.ejs")%>
 <body>
-    <div class="row ms-5 me-5 mt-3" >
+    <div class="row m-5" >
         <% for (value of data) { %>
             <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
                 <a href="/listing/view/<%= value._id %>" style="text-decoration: none;">
@@ -8,14 +8,12 @@
                         <img src="<%=value.image.url%>" class="card-img-top index-card-img" alt="...">
                         <div class="card-body">
                           <h6 class="card-title"><%= value.title %></h6>
-                          <p><%= value.location %></p>
+                          <p><%= value.price.toLocaleString("en-In") %> $/day</p>
                         </div>
                     </div>
                 </a>
             </div>
         <% } %>
     </div>
-    
-
     
 </body>
