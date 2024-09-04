@@ -1,8 +1,8 @@
 <% layout("./template/syntex.ejs")%>
 <body>
     <a href="/listing"><i class="fa-solid fa-backward"></i></a>
-    <div class="row m-4">
-        <div class="col-1 offset-3" >
+    <div class="row m-auto">
+        <div class="col-xl-5 col-lg-8 col-md-8 col-sm-12 m-auto">
             <div class="card view-card">
                 <img src="<%= idvalue.image.url %>" class="card-img-top view-img" alt="...">
                 <div class="card-body">
@@ -22,8 +22,8 @@
     </div>
     <hr>
     <h4 style="text-align: center; text-decoration: underline;">Reviews</h4>
-    <div class="row m-4">
-        <form class="col-2 offset-3 needs-validation rating-form " action="/review/<%=idvalue._id%>" method="post" novalidate>
+    <div class="row m-0">
+        <form class="col-xl-6 col-lg-8 col-md-10 col-sm-10 m-auto p-3 needs-validation" action="/review/<%=idvalue._id%>" method="get" novalidate>
             <fieldset class="starability-fade" name="rate">
               <input type="radio" id="no-rate" class="input-no-rate" name="rate" value="1" checked aria-label="No rating." />
               <input type="radio" id="first-rate1" name="rate" value="1" />
@@ -38,7 +38,7 @@
               <label for="first-rate5" title="Amazing">5 stars</label>
             </fieldset>
 
-            <div class="mb-3">
+            <div class="mb-2">
               <label for="exampleInputPassword1" class="form-label">Comment:</label>
               <textarea class="form-control border-2" id="exampleInputPassword1" name="comment" style="resize: none;" placeholder="Write comment here" required></textarea>
               <div class="invalid-feedback">
@@ -48,12 +48,12 @@
 
             <button type="submit" class="btn btn-primary">ADD</button>
         </form>
-        <div class="container mt-5">
+        <div class="container mt-3">
            
             <div class="row">
               <%for( rating of idvalue.ratings){%>
               <div class="col-sm-3">
-                <div class="card rating-card">
+                <div class="card rating-card mb-3">
                   <div class="card-body">
                     <p class="card-text mb-1">@<%=rating.creator.username%></p>
                     <p class="starability-result mb-1" data-rating="<%=rating.rating%>">
@@ -69,6 +69,33 @@
              </div>
              <%}%>
            </div>
-         </div>
+         </div>  
     </div>
+    <div id="map" class="col-xl-5 col-lg-8 col-md-8 col-sm-12 m-auto"></div>
+    <p></p>
 </body>
+
+<script>
+	// TO MAKE THE MAP APPEAR YOU MUST
+	// ADD YOUR ACCESS TOKEN FROM
+	// https://account.mapbox.com
+  let left = "<%=idvalue.geometry.coordinates[1]%>" || "23.1765";
+  let right = "<%=idvalue.geometry.coordinates[0]%>" || "75.7885";
+
+	mapboxgl.accessToken = "<%=process.env.MAP_TOKEN%>";
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        center: [right,left], // starting position [lng, lat]. Note that lat must be set between -90 and 90
+        zoom: 11, // starting zoom
+        style: 'mapbox://styles/mapbox/standard-satellite',
+    });
+    const marker = new mapboxgl.Marker({color:"red"})
+    .setLngLat([right,left])
+    .addTo(map);
+
+    const popup = new mapboxgl.Popup({offset: 25, className: 'my-class'})
+    .setLngLat([right,left])
+    .setHTML("<p><%= idvalue.title %></p>")
+    .setMaxWidth("600px")
+    .addTo(map);
+</script>

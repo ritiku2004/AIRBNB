@@ -1,5 +1,4 @@
 //Custome error handling class
-
 class expError extends Error{
     constructor(status,message){
         super(),

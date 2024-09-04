@@ -17,7 +17,7 @@ async function ls(){
     await list.deleteMany({});
     datalist.data = datalist.data.map((obj)=> ({
        ...obj,
-       owner : "665ee0ac76c6529dac35cb57"
+       owner : "66bc9bb621e81d91828cedf4"
     }));
    await list.insertMany(datalist.data);
    console.log("Data saved");

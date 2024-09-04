@@ -2,13 +2,17 @@ const express = require("express");
 const lists = require("../models/mongo.js");
 const {listSchema} = require("../schema.js");
 const expError = require("../utils/expError.js");
+const mapKey = process.env.MAP_TOKEN;
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const geocodingClient = mbxGeocoding({ accessToken: mapKey });
 
+ 
 module.exports.index = (async function (req,res){
-    const data = await lists.find({});
+    const data = await lists.find({}); 
     if(data.length==0) throw new expError(404,"list is empty");
-    else 
-    res.render("index",{data});
-});
+    else  
+    res.render("index",{data}); 
+}); 
 
 module.exports.view = (async (req,res)=>{
     const id = req.params.id;
@@ -41,9 +45,15 @@ module.exports.editpost = (async (req,res)=>{
     const list = await lists.findOne({_id: id});
     let joi = listSchema.validate(req.body);
     if(joi.error) throw new expError(401,"field required");
-    const url = req.file.path;
-    const filename = req.file.filename;
+
+    const url = req.file.path || req.body.image.url;
+    const filename = req.file.filename || req.body.image.url;
     const {title, description, price, location, country } = req.body;
+    let response = await geocodingClient
+    .forwardGeocode({ 
+        query: location,
+        limit: 1
+      }).send()
     if (req.user && list.owner[0]._id.equals(req.user._id)){
     const idvalue = await lists.findOneAndUpdate({_id: id},{title:title, description:description, image: {
         filename : filename,
@@ -51,7 +61,8 @@ module.exports.editpost = (async (req,res)=>{
         }, 
         price:price,
         location:location, 
-        country:country 
+        country:country,
+        geometry: response.body.features[0].geometry
     });
     }else{
         throw new expError(404,"You are not owner");
@@ -68,6 +79,15 @@ module.exports.createpost = ( async (req,res)=>{
     const {title, description, price, location, country } = req.body;
     let joi = listSchema.validate(req.body);
     if(joi.error) throw new expError(401,"field required");
+
+    //forward geo coding -
+
+    let response = await geocodingClient
+    .forwardGeocode({
+        query: location,
+        limit: 1
+      }).send()
+
     const url = req.file.path;
     const filename = req.file.filename;
     let newlist = await lists.create({
@@ -82,6 +102,7 @@ module.exports.createpost = ( async (req,res)=>{
         country
     });
     newlist.owner.push(req.user);
+    newlist.geometry = response.body.features[0].geometry;
     await newlist.save();
     let id = newlist._id;
     req.flash("success","New Listing Created");

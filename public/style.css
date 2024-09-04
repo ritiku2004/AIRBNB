@@ -30,7 +30,7 @@ html{
 .view-card{
     margin-top: 1rem;
     min-height: 25rem !important;
-    width: 40rem;
+    width: auto;
     box-shadow: none !important;
     border: none !important;
 }
@@ -43,7 +43,8 @@ html{
 }
 .view-img{
     margin: auto !important;
-    width: 35rem !important;
+    width: 100%;
+    max-width: 35rem !important;
     height: 17rem !important;
     border-radius: 1rem;
 }
@@ -70,11 +71,20 @@ label{
     margin: 0% !important;
 }
 
-.rating-form{
-    width: 50%;
-}
 
 .alert-box{
     display: flex;
     justify-content: center;
+}
+
+#map { 
+    height: 400px;
+    width: 60vw;
+ }
+
+.my-class{
+    font-size: 16px;
+    color: red;
+    background-color: transparent;
+    width: 200px;
 }

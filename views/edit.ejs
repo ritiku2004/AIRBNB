@@ -2,8 +2,8 @@
 <body>
     <a href="/listing/view/<%=idvalue._id%>"><i class="fa-solid fa-backward"></i></a>
     <h1 style="text-align: center;">Edit</h1>
-    <div class="row offset-3 ">
-        <div class="col-8">
+    <div class="row container m-auto">
+        <div class="col-xl-6 col-lg-8 col-md-8 col-sm-12 m-auto">
             <form action="/listing/edit/<%=idvalue._id%>"  method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label">Title:</label>
@@ -21,9 +21,9 @@
                 </div>
                   <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Present Image:</label><br>
-                    <img src="<%=idvalue.image.url%>" alt="Old image preview"m width="200px"><br>
+                    <img src="<%=idvalue.image.url%>" alt="Old image preview" width="300px" height="200px"><br>
                     <label for="exampleInputPassword1" class="form-label">New Image:</label>
-                    <input value="<%=idvalue.image.url%>" type="file" class="form-control border-2" id="exampleInputPassword1" name="url" required>
+                    <input type="file" value="<%=idvalue.image.filename%>" class="form-control border-2" id="exampleInputPassword1" name="url" required>
                   </div>
                   <div class="row">
                     <div class="mb-3 col-lg-4 col-sm-12">

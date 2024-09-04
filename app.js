@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const ejsMate = require("ejs-mate");
@@ -11,9 +12,14 @@ const flash = require("connect-flash");
 const passport= require("passport"); 
 const authRoute= require("./routes/autentication.js");
 
-mongoose.connect('mongodb://127.0.0.1:27017/project');
+dbURL = "mongodb://127.0.0.1:27017/project"
 
-require("dotenv").config();
+main().then(()=>{
+    console.log("connected db");
+}).catch(err => console.log(err));
+async function main(){
+    await mongoose.connect(dbURL);
+}
 
 app.set ("view engine", "ejs");
 app.engine("ejs",ejsMate); 
@@ -24,7 +30,7 @@ app.use (express.static(path.join(__dirname,"public")));
 const sessionOptions = {
     secret:"tanu",
     resave:false,
-    saveUnitilized:true,
+    saveUninitialized:true,
     cookie:{ 
         expires:Date.now() + 1*24*60*60*1000,
         maxAge: 1*24*60*60*1000,

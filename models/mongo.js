@@ -22,7 +22,16 @@ const listingSchema = new mongoose.Schema ({
          type:mongoose.Schema.Types.ObjectId,
          ref:"user"
       }
-   ]
+   ],
+   geometry:{
+      type: {
+         type: String, // Don't do `{ location: { type: String } }`
+         enum: ['Point'], // 'location.type' must be 'Point'
+       },
+       coordinates: {
+         type: [Number],
+       }
+   }
 })
 
 //Post request to delete reviews when page deleted.

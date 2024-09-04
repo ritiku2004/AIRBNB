@@ -13,8 +13,8 @@ function wrapasync(fn){
 }
 
 //Route to create a review
-router.post("/:id",isLoggedIn,wrapasync(async(req,res)=>{
-    const {rate, comment} = req.body; 
+router.get("/:id",isLoggedIn,wrapasync(async(req,res)=>{
+    const {rate, comment} = req.query; 
     let joi = ratingSchema.validate(req.body);
     const id = req.params.id;
     const list = await lists.findById(id);
