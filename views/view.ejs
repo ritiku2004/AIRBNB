@@ -4,7 +4,7 @@
     <div class="row m-auto">
         <div class="col-xl-5 col-lg-8 col-md-8 col-sm-12 m-auto">
             <div class="card view-card">
-                <img src="<%= idvalue.image.url %>" class="card-img-top view-img" alt="...">
+                 <img src="<%= idvalue.image.url %>" class="card-img-top view-img" alt="...">
                 <div class="card-body">
                   <p class="mb-1">Created by <%=idvalue.owner[0].username%></p>
                   <h4 class="card-title m-0"><%= idvalue.title %></h4>
@@ -95,7 +95,7 @@
 
     const popup = new mapboxgl.Popup({offset: 25, className: 'my-class'})
     .setLngLat([right,left])
-    .setHTML("<p><%= idvalue.title %></p>")
+    .setHTML("<p><%= idvalue.title %></p>") 
     .setMaxWidth("600px")
     .addTo(map);
 </script>

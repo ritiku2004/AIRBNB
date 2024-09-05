@@ -53,14 +53,13 @@ app.use((req,res,next)=>{
     next();
 }) 
 
+app.get("/",(req,res)=>{
+    res.redirect("/listing");
+})
+
 app.use("/listing", listingRoute);  //Router of listing 
 app.use("/review", reviewRoute);    //Router of reviews
 app.use("/auth", authRoute); 
-
-//Default route error
-app.all("*",()=>{
-    throw new expError(404,"Page not found");
-})
 
 // Error handling middleware
 app.use((err,req,res,next)=>{
